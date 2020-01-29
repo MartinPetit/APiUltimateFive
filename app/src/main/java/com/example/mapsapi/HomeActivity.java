@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageClickListener;
@@ -24,7 +25,7 @@ public class HomeActivity extends AppCompatActivity {
         "mbappe", "chaussures", "easy", "five", "ronaldo"
     };
 
-    CarouselPicker carouselPicker;
+    ViewFlipper viewFlipper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,18 +48,26 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        carouselPicker = (CarouselPicker) findViewById(R.id.carouselPicker);
+        int images[] = {R.drawable.ronaldo, R.drawable.mbappe, R.drawable.five};
 
+        viewFlipper = findViewById(R.id.v_flipper);
 
-        List<CarouselPicker.PickerItem> mixItems = new ArrayList<>();
-        mixItems.add(new CarouselPicker.TextItem("One", 20));
-        mixItems.add(new CarouselPicker.DrawableItem(R.drawable.ronaldo));
-        mixItems.add(new CarouselPicker.TextItem("two", 20));
-        mixItems.add(new CarouselPicker.DrawableItem(R.drawable.mbappe));
-        CarouselPicker.CarouselViewAdapter mixAdapter = new CarouselPicker.CarouselViewAdapter(this, mixItems,0);
-        carouselPicker.setAdapter(mixAdapter);
-
+        for (int image:images) {
+            flipperImages(image);
+        }
 
 
     }
+
+    public void flipperImages(int image) {
+        ImageView imageView = new ImageView(this);
+        imageView.setBackgroundResource(image);
+
+        viewFlipper.addView(imageView);
+        viewFlipper.setFlipInterval(4000);
+        viewFlipper.setAutoStart(true);
+
+        viewFlipper.setInAnimation(this, android.R.anim.slide_in_left);
+        viewFlipper.setInAnimation(this, android.R.anim.slide_out_right);
+    };
 }
