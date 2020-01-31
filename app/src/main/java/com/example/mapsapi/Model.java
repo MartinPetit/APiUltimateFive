@@ -5,11 +5,13 @@ public class Model {
     private int image;
     private String title;
     private String desc;
+    private String prix;
 
-    public Model(int image, String title, String desc) {
+    public Model(int image, String title, String desc, String prix) {
         this.image = image;
         this.title = title;
         this.desc = desc;
+        this.prix = prix;
     }
 
     public int getImage() {
@@ -34,5 +36,13 @@ public class Model {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getPrix() {
+        return prix;
+    }
+
+    public void setPrix(String prix) {
+        this.prix = prix;
     }
 }

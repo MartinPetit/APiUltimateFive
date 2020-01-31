@@ -40,15 +40,17 @@ public class Adapter extends PagerAdapter {
         View view = layoutInflater.inflate(R.layout.item, container, false);
 
         ImageView imageView;
-        TextView title, desc;
+        TextView title, desc, prix;
 
         imageView = view.findViewById(R.id.image);
         title = view.findViewById(R.id.title);
         desc = view.findViewById(R.id.desc);
+        prix = view.findViewById(R.id.prix);
 
         imageView.setImageResource(models.get(position).getImage());
         title.setText(models.get(position).getTitle());
         desc.setText(models.get(position).getDesc());
+        prix.setText(models.get(position).getPrix());
 
         container.addView(view, 0);
 

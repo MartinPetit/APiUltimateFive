@@ -38,6 +38,18 @@
 
             <TextView
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/title"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="200dp"
+                android:layout_below="@id/image"
+                android:text="Prix"
+                android:id="@+id/prix"/>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:id="@+id/desc"
                 android:layout_below="@id/title"
                 android:layout_marginTop="3dp"
