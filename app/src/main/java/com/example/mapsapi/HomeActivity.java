@@ -2,7 +2,10 @@ package com.example.mapsapi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -25,7 +28,11 @@ public class HomeActivity extends AppCompatActivity {
         "mbappe", "chaussures", "easy", "five", "ronaldo"
     };
 
+    private Button ViewPagerButton;
+
     ViewFlipper viewFlipper;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +63,20 @@ public class HomeActivity extends AppCompatActivity {
             flipperImages(image);
         }
 
+        ViewPagerButton = findViewById(R.id.ViewPager);
 
+        ViewPagerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, ViewPagerActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
+
+
+
 
     public void flipperImages(int image) {
         ImageView imageView = new ImageView(this);
