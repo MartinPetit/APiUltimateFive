@@ -24,10 +24,11 @@ public class ViewPagerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_pager);
 
         models = new ArrayList<>();
-        models.add(new Model(R.drawable.brochure, "brochure", "Brochure est un document qui informe les utilisatuersdzdz zdzdzd zdzd zd "));
-        models.add(new Model(R.drawable.sticker, "Sticker", "le sticker c'est plutot sympa ca se colle un peu partout genre ou on vetut"));
-        models.add(new Model(R.drawable.poster, "Poster", "J'ai deja eu des poster dans ma chambre notemment quand j'eais petit"));
-        models.add(new Model(R.drawable.namecard, "NameCard", "une namecard corrspond a un nom que l'on peut donner à iune carte"));
+        models.add(new Model(R.drawable.mbappe, "brochure", "Brochure est un document qui informe les utilisatuersdzdz zdzdzd zdzd zd "));
+        models.add(new Model(R.drawable.ronaldo, "Sticker", "le sticker c'est plutot sympa ca se colle un peu partout genre ou on vetut"));
+        models.add(new Model(R.drawable.five, "Poster", "J'ai deja eu des poster dans ma chambre notemment quand j'eais petit"));
+        models.add(new Model(R.drawable.easy, "NameCard", "une namecard corrspond a un nom que l'on peut donner à iune carte"));
+        models.add(new Model(R.drawable.sticker, "test", "test2"));
 
         adapter = new Adapter(models, this);
         viewPager = findViewById(R.id.ViewPagerCard);
