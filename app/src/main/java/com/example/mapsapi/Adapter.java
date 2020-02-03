@@ -1,6 +1,7 @@
 package com.example.mapsapi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class Adapter extends PagerAdapter {
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, final int position) {
         layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.item, container, false);
 
@@ -51,6 +52,18 @@ public class Adapter extends PagerAdapter {
         title.setText(models.get(position).getTitle());
         desc.setText(models.get(position).getDesc());
         prix.setText(models.get(position).getPrix());
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra("param", models.get(position).getTitle());
+                intent.putExtra("image", models.get(position).getImage());
+                intent.putExtra("description", models.get(position).getDesc());
+                context.startActivity(intent);
+                // finish();
+            }
+        });
 
         container.addView(view, 0);
 

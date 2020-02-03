@@ -1,11 +1,21 @@
 package com.example.mapsapi;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.animation.ArgbEvaluator;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +27,9 @@ public class ViewPagerActivity extends AppCompatActivity {
     List<Model> models;
     Integer[] colors = null;
     ArgbEvaluator argbEvaluator = new ArgbEvaluator();
+    private String cuuentUserId;
+    private FirebaseUser firebaseUser;
+    private FirebaseAuth mAuth;
 
 
 
@@ -24,6 +37,61 @@ public class ViewPagerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pager);
+
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        DatabaseReference myRef = database.getReference("Matches");
+        cuuentUserId = mAuth.getCurrentUser().getUid();
+
+
+
+
+        myRef.child(cuuentUserId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                if (dataSnapshot.exists() && dataSnapshot.hasChild("image"))
+                {
+                    String date = dataSnapshot.child("date").getValue().toString();
+                    String heure = dataSnapshot.child("heure").getValue().toString();
+                    String duree=  dataSnapshot.child("duree").getValue().toString();
+                    String type =  dataSnapshot.child("type").getValue().toString();
+                    String prix =  dataSnapshot.child("prix").getValue().toString();
+                    String ville =  dataSnapshot.child("ville").getValue().toString();
+                    String description = dataSnapshot.child("description").getValue().toString();
+                    String image= dataSnapshot.child("image").getValue().toString();
+
+                    Log.i("tab", "resultat" + date);
+
+
+
+                }
+
+                else if (dataSnapshot.exists())
+                {
+                    String date = dataSnapshot.child("date").getValue().toString();
+                    String heure = dataSnapshot.child("heure").getValue().toString();
+                    String duree=  dataSnapshot.child("duree").getValue().toString();
+                    String type =  dataSnapshot.child("type").getValue().toString();
+                    String prix =  dataSnapshot.child("prix").getValue().toString();
+                    String ville =  dataSnapshot.child("ville").getValue().toString().toLowerCase();
+                    String description = dataSnapshot.child("description").getValue().toString();
+
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError)
+            {
+
+            }
+        });
+
+
+
 
         models = new ArrayList<>();
         models.add(new Model(R.drawable.mbappe, "brochure", "Brochure est un document qui informe les utilisatuersdzdz zdzdzd zdzd zd ", "10 €" ));
@@ -37,23 +105,14 @@ public class ViewPagerActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         viewPager.setPadding(130,0, 130, 0);
 
-        Integer[] colors_temp = {getResources().getColor(R.color.color1),
-        getResources().getColor(R.color.color2),
-        getResources().getColor(R.color.color3),
-        getResources().getColor(R.color.color4)};
-
-        colors = colors_temp;
 
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if (position < (adapter.getCount() -1) && position < (colors.length - 1)) {
-                    viewPager.setBackgroundColor((Integer) argbEvaluator.evaluate(positionOffset, colors[position], colors[position]));
-                }else {
-                    viewPager.setBackgroundColor(colors[colors.length - 1]);
-                }
+
             }
+
 
             @Override
             public void onPageSelected(int position) {
