@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class Adapter extends PagerAdapter {
@@ -48,9 +50,12 @@ public class Adapter extends PagerAdapter {
         desc = view.findViewById(R.id.desc);
         prix = view.findViewById(R.id.prix);
 
+
         title.setText(models.get(position).getVille());
         desc.setText(models.get(position).getDescription());
         prix.setText(models.get(position).getPrix());
+        Picasso.get().load(models.get(position).getImage()).placeholder(R.drawable.matcher).into(imageView);
+
 
 
         container.addView(view, 0);

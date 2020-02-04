@@ -17,6 +17,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,7 @@ public class ViewPagerActivity extends AppCompatActivity {
     Integer[] colors = null;
     ArgbEvaluator argbEvaluator = new ArgbEvaluator();
     private DatabaseReference MatcheRef;
+    private StorageReference matchePhoto;
 
 
 
@@ -41,6 +44,7 @@ public class ViewPagerActivity extends AppCompatActivity {
 
 
         MatcheRef = FirebaseDatabase.getInstance().getReference().child("Matches");
+        matchePhoto = FirebaseStorage.getInstance().getReference().child("matche image");
 
 
         FirebaseRecyclerOptions<Matche> options = new FirebaseRecyclerOptions.Builder<Matche>()
@@ -56,7 +60,7 @@ public class ViewPagerActivity extends AppCompatActivity {
         adapter = new Adapter(models, this);
         viewPager = findViewById(R.id.ViewPagerCard);
         viewPager.setAdapter(adapter);
-        viewPager.setPadding(130,0, 130, 0);
+        viewPager.setPadding(65,80, 65, 0);
 
         MatcheRef.addValueEventListener(new ValueEventListener() {
             @Override
