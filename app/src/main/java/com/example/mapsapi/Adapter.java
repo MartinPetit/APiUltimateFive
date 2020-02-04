@@ -15,11 +15,11 @@ import java.util.List;
 
 public class Adapter extends PagerAdapter {
 
-    private List<Model> models;
+    private List<Matche> models;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public Adapter(List<Model> models, Context context) {
+    public Adapter(List<Matche> models, Context context) {
         this.models = models;
         this.context = context;
     }
@@ -48,22 +48,10 @@ public class Adapter extends PagerAdapter {
         desc = view.findViewById(R.id.desc);
         prix = view.findViewById(R.id.prix);
 
-        imageView.setImageResource(models.get(position).getImage());
-        title.setText(models.get(position).getTitle());
-        desc.setText(models.get(position).getDesc());
+        title.setText(models.get(position).getVille());
+        desc.setText(models.get(position).getDescription());
         prix.setText(models.get(position).getPrix());
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("param", models.get(position).getTitle());
-                intent.putExtra("image", models.get(position).getImage());
-                intent.putExtra("description", models.get(position).getDesc());
-                context.startActivity(intent);
-                // finish();
-            }
-        });
 
         container.addView(view, 0);
 
