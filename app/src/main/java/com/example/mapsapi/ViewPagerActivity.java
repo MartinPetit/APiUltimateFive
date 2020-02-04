@@ -53,7 +53,6 @@ public class ViewPagerActivity extends AppCompatActivity {
 
 
         models = new ArrayList<>();
-        models.add(new Matche());
         adapter = new Adapter(models, this);
         viewPager = findViewById(R.id.ViewPagerCard);
         viewPager.setAdapter(adapter);
